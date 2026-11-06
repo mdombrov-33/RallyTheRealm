@@ -14,7 +14,7 @@ The project will publish its source and documentation on GitHub and distribute t
 
 ## When the scene opens
 
-The scene opens automatically before a battle when the player's realm has an army in it. The player configures the trigger in CK3's mod settings:
+The scene opens automatically when a qualifying battle is about to progress and the player's realm has an army in it. The game may already have created the combat and joined the armies; the scene must pause before the battle advances. The player configures the trigger in CK3's mod settings:
 
 - Every battle involving the player's realm armies.
 - Only battles in which the ruler or a chosen commander is leading an army.

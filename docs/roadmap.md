@@ -1,6 +1,6 @@
 # Roadmap
 
-This roadmap tracks evidence and working software. A planned milestone is not complete because its scripts compile, its package builds, or a screenshot resembles the intended interface. Record the game version, test setup, steps, and observed result for each in-game milestone. See [feasibility](feasibility.md) for evidence standards and open integration questions.
+This roadmap owns project status and work order. A planned milestone is not complete because its scripts compile, its package builds, or a screenshot resembles the intended interface. Record the game version, test setup, steps, and observed result for each in-game milestone. See the [technical validation plan](technical-validation.md) for the test matrix and [feasibility](feasibility.md) for the gate to an implementation plan.
 
 ## Current state
 
@@ -10,21 +10,21 @@ This roadmap tracks evidence and working software. A planned milestone is not co
 
 **Observed CK3 behavior:** one in-game run showed a custom window opening an event and applying a temporary +1 Advantage character modifier to the player ruler. The game version and checksum were not recorded. This does not prove automatic battle timing, army targeting, combat impact, or external communication; see [feasibility](feasibility.md).
 
-**Next work item (`not_started`):** prototype automatic detection of a battle involving a player realm army, pause before combat, and show participating armies and commanders. Keep AI, microphone, and speech scoring out of this slice.
+**Next work item (`not_started`):** prototype automatic detection of a battle involving a player realm army, pause before the battle advances, and show participating armies and commanders. Keep AI, microphone, and speech scoring out of this slice.
 
 The ignored `ck3-reference/` folder is a local game-source snapshot with unknown version provenance. It is research material, not project source; keep it out of commits and distributable packages.
 
 ## Next: prove the pre-battle scene
 
-Build a focused in-game prototype that detects a battle involving a player realm army, pauses before the fight begins, and presents a briefing with the participating armies and commanders. It should cover the case where the player's realm joins an ally's war but the player is not war leader. Keep AI, microphone, and speech scoring out of this prototype.
+Build a focused in-game prototype that detects a battle involving a player realm army, pauses before the battle advances, and presents a briefing with the participating armies and commanders. It should cover the case where the player's realm joins an ally's war but the player is not war leader. Keep AI, microphone, and speech scoring out of this prototype.
 
-The supplied source snapshot says `on_combat_start` runs only after the battle has started and its starting armies have joined their sides. That hook cannot by itself deliver the required pre-battle pause. The prototype must test another trigger path in the actual game build. Mark the item complete only after the scene opens automatically at the intended time, its context is correct, and the player can continue safely.
+The supplied source snapshot says `on_combat_start` runs after starting armies have joined their sides. The combat object has begun, but the source does not say whether the first combat phase has advanced before an event can pause the game. Test whether a blocking scene at this hook appears before the battle makes progress. If it does, the hook may support the intended player experience; if it does not, test another trigger path. Mark the item complete only after the scene opens automatically at an acceptable point, its context is correct, and the player can continue safely.
 
 ## Planned milestones
 
-### 1. Identify the battle and pause before combat
+### 1. Identify the battle and pause before it advances
 
-Demonstrate the configurable trigger in a single-player base-game campaign. Verify an every-player-realm-army mode, a ruler-or-commander-led mode, and off. Verify the pause and continue flow, including an allied war where the player is not the war leader. Record which context CK3 actually exposes before the battle.
+Demonstrate the configurable trigger in a single-player base-game campaign. Verify an every-player-realm-army mode, a ruler-or-commander-led mode, and off. Verify the pause and continue flow, including an allied war where the player is not the war leader. Record whether combat has been initialized, whether any battle progress has occurred, and which context CK3 exposes at that moment.
 
 ### 2. Establish speakers, audience, and effect scope
 

@@ -12,7 +12,8 @@ The project is in design and feasibility work. There is no playable speech mod o
 
 - [Product design](docs/design.md) describes the intended player experience, scope, and open design work.
 - [Roadmap](docs/roadmap.md) shows what is demonstrated and what comes next.
-- [Feasibility](docs/feasibility.md) records CK3 evidence, acceptance criteria, and test requirements.
+- [Technical validation plan](docs/technical-validation.md) records CK3 source findings and the runtime tests needed before choosing a stack.
+- [Feasibility](docs/feasibility.md) explains the evidence required before an implementation plan can be chosen.
 - [Architecture decisions](docs/decisions/README.md) records accepted boundaries and alternatives.
 
 ## Target scope

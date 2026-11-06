@@ -6,7 +6,7 @@ Rally the Realm is a Crusader Kings III mod in design and feasibility work. The 
 
 - For player behavior and scope, read [product design](docs/design.md).
 - For current status and the next work item, read the [roadmap](docs/roadmap.md).
-- Before investigating CK3 behavior, read [feasibility](docs/feasibility.md).
+- Before investigating CK3 behavior or planning runtime tests, read [technical validation](docs/technical-validation.md) and [feasibility](docs/feasibility.md).
 - Before changing an architectural boundary, read the [decision index](docs/decisions/README.md) and relevant records.
 
 Update the document that owns a fact and point other documents to it. Keep the roadmap as the single source for project status and next steps.

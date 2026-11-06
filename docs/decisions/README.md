@@ -13,6 +13,6 @@ The technology stack, communication method, and calibrated evaluation rubric rem
 
 Use a numbered Markdown file with a descriptive title. Record its status, the problem and constraints, the decision, alternatives considered, and the consequences. Link to evidence where the choice depends on a technical finding. A proposal should remain marked as proposed until it is adopted.
 
-Keep product behavior in the [design](../design.md) and implementation evidence in the feasibility document. An ADR should explain a consequential choice rather than repeat either document.
+Keep product behavior in the [design](../design.md), test procedures and evidence in the [technical validation plan](../technical-validation.md), and the decision gate in [feasibility](../feasibility.md). An ADR should explain a consequential choice rather than repeat those documents.
 
 When a decision changes, add a new record and mark the old one as superseded with a link to its replacement. Preserve the original reasoning so readers can understand why the earlier choice was made.

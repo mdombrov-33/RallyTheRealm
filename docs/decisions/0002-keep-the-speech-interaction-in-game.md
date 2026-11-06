@@ -23,6 +23,6 @@ Requiring every component to run natively inside CK3 would constrain implementat
 
 ## Consequences
 
-The feasibility work must test automatic pre-battle timing, the visible interaction, and the exchange of data. A functioning external process is insufficient evidence if the player must leave the game to use it.
+The [technical validation plan](../technical-validation.md) must test battle timing, the visible interaction, and the exchange of data. A functioning external process is insufficient evidence if the player must leave the game to use it.
 
 If a helper or overlay is selected, its interaction with game focus, input, window modes, and supported platforms will need testing. The communication method, UI technology, startup process, and operating system support remain undecided.
