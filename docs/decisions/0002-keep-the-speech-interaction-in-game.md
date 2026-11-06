@@ -1,17 +1,17 @@
-# ADR 0002 Keep the speech interaction in game
+# ADR 0002 Keep the speech interaction in the game experience
 
 **Status:** Accepted  
-**Date:** 2026-11-01
+**Date:** 2026-11-06
 
 ## Context
 
-A speech occurs during a campaign, before combat. Requiring the player to switch to another application to record, submit, or inspect it would interrupt that interaction. CK3's ability to support recording, external evaluation, and the intended interface has not been established for this project.
+A speech occurs during a campaign, before combat. The intended scene opens automatically according to the player's battle settings, pauses the game, and stays available through recording or typing, transcript review, submission, and result inspection. Requiring the player to switch to another application during that flow would interrupt the interaction. CK3's ability to support automatic pre-battle timing, recording, external evaluation, and the intended interface has not been established for this project.
 
 ## Decision
 
-Players must be able to initiate a speech, provide and review its text, submit it, and inspect the result without switching applications during play.
+The complete speech interaction must remain accessible without switching applications during play. The player chooses whether and how often the scene opens in CK3 settings; the speech itself is presented automatically before qualifying battles rather than started from a button press.
 
-A background application is acceptable if the implementation needs one. Native game menus, an overlay, and other integration approaches remain candidates. This decision specifies the player experience without selecting where recording or evaluation runs.
+A pure mod is preferred, but a quiet background application is acceptable if feasibility work requires one. Native CK3 UI is the desired presentation when it can support the experience; an overlay remains a candidate if it can stay over the game and avoid a visible application switch. This decision specifies the player experience without selecting the technical architecture.
 
 The requirement covers the speech interaction. Installation, API configuration, and application startup will need their own usability design.
 
@@ -23,6 +23,6 @@ Requiring every component to run natively inside CK3 would constrain implementat
 
 ## Consequences
 
-The integration experiment must exercise the visible interaction as well as the exchange of data. A functioning external process is insufficient evidence if the player must leave the game to use it.
+The feasibility work must test automatic pre-battle timing, the visible interaction, and the exchange of data. A functioning external process is insufficient evidence if the player must leave the game to use it.
 
 If a helper or overlay is selected, its interaction with game focus, input, window modes, and supported platforms will need testing. The communication method, UI technology, startup process, and operating system support remain undecided.

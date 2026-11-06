@@ -4,10 +4,10 @@ These records explain choices that constrain the implementation. An accepted dec
 
 | Record | Status | Decision |
 | --- | --- | --- |
-| [0001](0001-separate-assessment-from-gameplay-effects.md) | Accepted | Separate model assessment from gameplay effects |
-| [0002](0002-keep-the-speech-interaction-in-game.md) | Accepted | Keep the speech interaction within the game experience |
+| [0001](0001-separate-assessment-from-gameplay-effects.md) | Accepted | Validate model assessments and let project rules determine effects |
+| [0002](0002-keep-the-speech-interaction-in-game.md) | Accepted | Keep the complete speech interaction in the game experience |
 
-The technology stack, communication method, and evaluation rubric remain open. The [feasibility milestone](../feasibility.md) will provide evidence for the integration decision.
+The technology stack, communication method, and calibrated evaluation rubric remain open. The [roadmap](../roadmap.md) and [feasibility work](../feasibility.md) record what must be demonstrated before choosing an integration.
 
 ## Adding a decision
 

@@ -1,21 +1,22 @@
 # Rally the Realm
 
-Rally the Realm is a planned Crusader Kings III mod that lets players address their troops before battle. Speak as a ruler or commander, or type a speech, and have those words evaluated against the circumstances of the war. The resulting reaction can help or hurt the army in the coming fight.
+Rally the Realm is an in-development Crusader Kings III mod about addressing your troops before battle. Your words are judged in the context of the speaker, the audience, and the war. A successful speech can help your realm's armies; a truly poor one can make the coming battle harder.
 
-The project is in design and feasibility research. There is no playable release yet. The first milestone is to demonstrate a reliable interaction between CK3 and an external process, with a visible gameplay effect and no need for the player to switch applications.
+The intended scene opens automatically before a qualifying battle, pauses the game, and lets the player speak or type. A clear score breakdown explains how the speech was assessed and what effect follows. Typed and spoken input, multiple hosted AI providers and models, and a polished in-game experience are part of the first-release target.
 
-## Intended experience
+## Project status
 
-A speech should matter because of what it means to the people hearing it. The speaker, the opposing sides, and the situation should shape the response. A disastrous speech can turn a close fight against the player. Funny outcomes can emerge naturally from a world that takes the speech seriously.
+The project is in design and feasibility work. There is no playable speech mod or companion application yet. The [roadmap](docs/roadmap.md) is the source for the current state and next work item; [feasibility](docs/feasibility.md) records what has been observed and what must be proved.
 
-Players should be able to follow the result as it is calculated. The interface will distinguish the model's assessment from the rules that apply gameplay effects, show each actual contribution, and leave the completed breakdown available to inspect.
+## Project guide
 
-The initial scope is single-player CK3 using the base game. Compatibility with DLC, other mods, and additional modes has not been established. A background application is an option under investigation; the player experience should remain within the game throughout a speech. Players will supply and pay for any API services they use.
+- [Product design](docs/design.md) describes the intended player experience, scope, and open design work.
+- [Roadmap](docs/roadmap.md) shows what is demonstrated and what comes next.
+- [Feasibility](docs/feasibility.md) records CK3 evidence, acceptance criteria, and test requirements.
+- [Architecture decisions](docs/decisions/README.md) records accepted boundaries and alternatives.
 
-## Project documentation
+## Target scope
 
-- [Design](docs/design.md) describes the intended behavior, scope, and unresolved design questions.
-- [Feasibility milestone](docs/feasibility.md) defines the first experiment and the evidence required to proceed.
-- [Architecture decisions](docs/decisions/README.md) records decisions, their reasons, and their consequences.
+The first release is planned for single-player CK3 using the base game, on Windows first, in English. It will include typed and microphone input, with speech recognition running locally. Players will configure and pay for their own AI provider. The project plans to publish source on GitHub and distribute the mod through a workshop.
 
-There are no installation, build, or test commands yet. They will be documented when the corresponding implementation can be run and verified.
+These are targets, not existing features. No supported CK3 version, integration method, programming language, or release build has been established. See [what remains open](docs/design.md#still-open) and the current status in the [roadmap](docs/roadmap.md).

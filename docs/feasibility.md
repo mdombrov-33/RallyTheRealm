@@ -1,64 +1,56 @@
-# Feasibility milestone
+# Feasibility
 
-Demonstrate one complete speech-related interaction between CK3 and an external process before implementing speech recognition or model evaluation. The experiment must obtain real game context, return a controlled result, and apply a visible effect to the intended target while the player stays in the game.
+This document owns CK3 evidence and acceptance criteria. The [design](design.md) owns intended player behavior; the [roadmap](roadmap.md) owns current status and next work. Keep intended behavior separate from observed game behavior.
 
-**Status:** Not started. No integration experiment has been run, and no CK3 capability has been verified for this project.
+## Existing evidence
 
-This document owns the current milestone. The [design](design.md) defines the desired experience; the experiment determines which implementation can support it.
+One in-game run showed a custom window opening an event and applying a temporary +1 Advantage character modifier to the player ruler. The observation came from a screenshot; its game version and checksum are unknown. It supports only the window-to-event-to-character-modifier path. It does not demonstrate automatic battle detection, pre-combat pause control, army selection, combat impact, a battle-scoped effect, or external communication.
 
-## Research questions
+The ignored local game-source snapshot has unknown version provenance. Its `common/on_action/combat_on_actions.txt` comments say `on_combat_start` runs after the starting armies have joined their combat sides. The inspected GUI and script examples also show that UI actions can invoke scripted events and that character modifiers can be applied. These observations do not establish a pre-battle trigger, an army-scoped effect, or a normal-play external communication channel. Verify every relevant behavior in a recorded game build before relying on it.
 
-Investigate these questions in order, using the installed game version, relevant modding documentation, and inspectable implementations:
+## Experiment 1: pre-battle trigger and briefing
 
-1. Can a player-initiated pre-combat interaction identify a speaker and army, and keep the game paused?
-2. Can the mod expose enough real context for an external process to identify that interaction and its participants?
-3. Can an external result be received during the running session and applied through game scripting?
-4. Which effects can be scoped to the intended character, army, or engagement, and how do they expire?
-5. Which interface approach lets the player initiate the interaction and inspect the result without switching applications?
+Test on a recorded CK3 build in an ordinary single-player base-game campaign. Start with no unrelated mods. Record the version and checksum from the game, enabled DLC, launcher configuration, and exact steps.
 
-Custom game UI, a background helper, and an overlay are candidates. An interface displayed over CK3 does not by itself establish native support for recording audio or calling an API. Integration methods should be assessed on reproducibility, installation burden, maintenance cost, and their effect on ordinary play.
+Demonstrate each intended trigger setting:
 
-## Experiment
+1. Every battle involving a player realm army.
+2. Only battles where the ruler or a selected field commander leads an army.
+3. Off.
 
-Build the smallest mod and external process needed to test the round trip. Use a fixed or manually selected result with a known, limited effect. The experiment does not need a microphone, transcription service, model, evaluation rubric, or polished calculation animation.
+For the enabled modes, record whether the game pauses before combat, what the player can do while paused, and how play resumes. Include a battle in an ally's war where the player is not war leader. Inspect whether CK3 exposes the battle, location, sides, armies, commanders, and war purpose in time to show a useful briefing. Test multiple player armies and commanders. The prototype need not evaluate a speech or apply a combat effect.
 
-Record the actual transport, the available context, the target of the effect, and any special runtime requirements. If a route depends on a console, debug mode, clipboard access, runtime hooks, or another unusual mechanism, document that dependency and how it affects a possible public release. An experimental mechanism is not automatically a release architecture.
+### Acceptance
 
-## Acceptance criteria
+The experiment passes only when the game opens the custom scene automatically before combat under the selected setting, pauses as intended, presents verified participants and context, and proceeds correctly when the player continues or disables the feature. Record the precise trigger and any limits. A manually opened test event or a hook that runs after combat starts does not pass.
 
-The milestone passes when a reproducible demonstration establishes all of the following:
+## Experiment 2: effect target and duration
 
-- A player action inside CK3 begins the interaction before combat, with the game paused as intended.
-- The external process receives enough real context to identify the request and the chosen participants.
-- A controlled external result reaches the same running game session without restarting CK3 or manually editing files during play.
-- The intended target receives the documented effect, and an unrelated target does not.
-- The result and effect are visible without the player switching applications.
-- A failed or cancelled exchange leaves gameplay unchanged. A duplicate result does not apply the effect twice.
-- After the interaction completes, saving and reloading preserves the expected effect state without reapplying the result.
+Once battle participants are available, apply a fixed test effect to all participating armies belonging to the player's realm. Confirm that allied armies, unrelated armies, and the player's other simultaneous battles do not receive it. Test when the ruler is absent, when a selected speaker is not an army commander, and when a commander is replaced. Verify how the effect expires and what a save/reload does.
 
-If only part of this path works, record the demonstrated portion and the remaining blocker. A transport demonstration alone does not establish correct effect scope or a usable player interaction.
+The existing ruler modifier is not evidence of an army-level effect. The Advantage bonus proposed by the design remains a target until the prototype proves its scope and lifetime in combat.
 
-## Required evidence
+## Experiment 3: exchange data with an external process
 
-For each attempted approach, record:
+After the in-game request has a reliable identity and participant context, test a minimal controlled request and response in the same running session. Do not add speech recognition or a model; use a fixed result first. Prefer a pure-mod connection, then test an unobtrusive helper if the pure-mod route cannot meet the intended interaction. The player must not switch applications during play.
 
-- The CK3 version, enabled DLC and mods, operating system, and runtime configuration used for the test.
-- The implementation revision and exact reproduction steps.
-- The context exchanged and how requests and results are associated with their targets.
-- The expected and observed effects, including the failure, duplicate, and save/reload checks.
-- Supporting output, screenshots, or recordings that make the result reviewable.
-- Known limitations and whether they prevent the intended public release experience.
+Record the actual data exchanged, transport, normal-play/debug requirements, process startup behavior, UI approach, and failure handling. Test missing helper, timeout, retry, cancellation, malformed result, duplicate result, unrelated target, and save/reload. A screenshot or successful package build alone is insufficient. Do not choose a programming language or UI framework until the required boundary has been exercised.
 
-Keep credentials and personal data out of published evidence. Setup and verification commands belong here once they have been exercised successfully. Until then, there is no executable verification procedure for this milestone.
+## Evidence to record
 
-## Outcome
+For each experiment, record:
 
-A successful experiment should lead to an architecture decision explaining the chosen communication and UI approach, the alternatives examined, and their tradeoffs. It should also provide the list of accessible context and supported effects needed to begin evaluation design.
+- CK3 version, checksum, enabled DLC and mods, operating system, and relevant settings.
+- Experiment revision and reproduction steps.
+- The event timing, game context observed, and intended and actual effect targets.
+- Expected and observed behavior for success, cancellation, failure, duplicate, and save/reload cases that apply.
+- Screenshots or recordings that support the result, and relevant game logs.
+- Known limitations and whether they prevent the intended player experience.
 
-If a reliable round trip cannot be demonstrated, document the specific limitation and reconsider the interaction or integration method. There is no settled prohibition on particular integration techniques, and there is no commitment to adopt a technique merely because it can be made to work.
+Remove credentials and private player data from published evidence. Keep local CK3 game files out of the repository and all distributed packages. The ignored `ck3-reference/` directory is local research material only.
 
-## Reference project
+## Architecture decision
 
-[Voices of the Court](https://github.com/Voices-of-the-Court/VOTC) is a relevant implementation to investigate. Its [installation documentation](https://docs.voicesofthecourt.app/installation/) describes a CK3 mod used with a separate desktop application. Its [window implementation](https://github.com/Voices-of-the-Court/VOTC/blob/main/src/main/main.ts) provides an example of an external overlay.
+Once a repeatable path supports pre-battle timing, the required context, a return result, and a bounded effect, record the chosen architecture in a new decision record. Compare the pure-mod and helper approaches against the player experience, reliability, installation, maintenance, and supported systems. A route that only works with a debug console or manual file editing is not automatically suitable for public release.
 
-These references establish a candidate approach to study. They do not demonstrate Rally the Realm's required context, effect scope, or interaction. Record the exact upstream revision when using its implementation as evidence for a technical choice, and review the applicable license before reusing code.
+The [Voices of the Court](https://github.com/Voices-of-the-Court/VOTC) project is a reference for studying a CK3 mod used alongside a desktop application. Its [installation guide](https://docs.voicesofthecourt.app/installation/) and [source](https://github.com/Voices-of-the-Court/VOTC) are examples to investigate, not proof that their integration path meets Rally the Realm's pre-battle timing, context, effect, or privacy needs. Review its applicable license before reusing any code or assets.

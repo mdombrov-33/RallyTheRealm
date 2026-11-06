@@ -1,1 +1,5 @@
-ck3-reference
+ck3-reference/
+dist/
+.DS_Store
+.mypy_cache/
+__pycache__/
